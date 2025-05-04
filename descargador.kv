@@ -15,10 +15,11 @@ Aplicacion:
         TextInput:
             id: textInput
             size_hint: None, None
-            width: "600dp"
+            width: "100dp"
             height: "35dp"
             multiline: False 
             anchor_y: "center"
+            on_text: root.URLS = self.text
     Label:
         text: "Descarga Album?"
         font_name:"fonts/starjedi/Starjedi.ttf"
@@ -33,10 +34,13 @@ Aplicacion:
                 width: "100dp"
                 height: "100dp"
                 anchor_x: "center"
+                font_name:"fonts/starjedi/Starjedi.ttf"
         GridLayout:
             cols: 2
             Label:
                 text: "Artista"
+                font_name:"fonts/starjedi/Starjedi.ttf"
+
             AnchorLayout:
                 TextInput:
                     id: textInput
@@ -45,8 +49,11 @@ Aplicacion:
                     height: "35dp"
                     multiline: False 
                     anchor_y: "center"
+                    on_text: root.nombre_del_artista = self.text
+
             Label:
-                text: "Artista"
+                text: "Album"
+                font_name:"fonts/starjedi/Starjedi.ttf"
             AnchorLayout:
                 TextInput:
                     id: textInput
@@ -55,7 +62,18 @@ Aplicacion:
                     height: "35dp"
                     multiline: False 
                     anchor_y: "center"
+                    on_text: root.nombre_del_album = self.text
                     
+    Label:
+        text: ""
+    
+    Button:
+        text: "Descargar"
+        font_name:"fonts/starjedi/Starjedi.ttf"
+        size_hint: None, None
+        width: "100dp"
+        height: "100dp"
+        on_press: root.descargar_boton()
 
 
    

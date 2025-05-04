@@ -11,13 +11,11 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.gridlayout import GridLayout
-#from tkinter import*
-#from tkinter import ttk
- 
-#raiz = Tk()
-#raiz.title("Descarador!")
-#raiz.mainloop()
-#mainframe = ttk.Frame(raiz, padding="3 3 12 12")
+import requests
+from mutagen.mp4 import MP4, MP4Cover
+#from android.storage import primary_external_storage_path
+import os
+
 """class WidgetsExample(GridLayout):
     counter = 0
     my_text = StringProperty("0")
@@ -69,14 +67,54 @@ class BoxLayoutExample(BoxLayout):
         self.add_widget(b2)  
         self.add_widget(b3)"""
 class Aplicacion(GridLayout):
+
+    ydl_opts= {}
+    URLS = "" 
+    nombre_del_artista = StringProperty("")
+    nombre_del_album = StringProperty("")
+    directorio = r"C:\Users\PC\Desktop\videos_descargados\Descargador_Musica_Android\Pruebas"
+    
+
     pass
+
+    def descargar_audio(self, directorio):
+        self.ydl_opts = {
+        'ignoreerrors': True,
+        'format': 'm4a/bestaudio/best', 'paths': {"home": directorio},
+        'postprocessors': 
+        [{  
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3'
+        },
+        
+        {
+        'key': 'FFmpegMetadata',
+        
+        },
+        {
+        'key': 'EmbedThumbnail'
+        }
+        ],
+        'postprocessor_args': [  
+        '-metadata', f'artist={self.nombre_del_artista}',
+        '-metadata', f'album={self.nombre_del_album}',
+        ],
+        "writethumbnail" : True
+            
+        }
+        return self.ydl_opts
+    
+    def descargar_boton(self):
+        self.descargar_audio(self.directorio)
+        with yt_dlp.YoutubeDL(self.ydl_opts) as ydl:
+            ydl.download(self.URLS)  #Definir ydl opts que son las opciones
 class Descargador(App):
     def build(self):
         return Aplicacion()
 if __name__ == '__main__':
     Descargador().run()
 
-def descargar_audio(directorio):
+"""def descargar_audio(directorio):
         nombre_del_artista = ""
         nombre_del_album = ""
         albumSN = input("¿Quiere descargar un album? \n (s/n)")
@@ -85,7 +123,7 @@ def descargar_audio(directorio):
             nombre_del_artista= input("---> Nombre del Artista ")
         else: pass
         ydl_opts = {
-        'ignoreerrors': {True},
+        'ignoreerrors': True,
         'format': 'm4a/bestaudio/best', 'paths': {"home": directorio},
         'postprocessors': 
         [{  
@@ -109,7 +147,7 @@ def descargar_audio(directorio):
         "writethumbnail" : True
         
     }
-        return ydl_opts
+        return ydl_opts"""
 def descargar_video_sinFfmpeg(directorio):
 
     ydl_opts = {

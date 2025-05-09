@@ -1,0 +1,185 @@
+Aplicacion:
+<Aplicacion>:
+    cols: 2
+    #right, left, center
+    #anchor_x: "center"
+    #bottom, top, center
+    #anchor_y: "top"
+
+    Label:
+        text: "Link"
+        font_name:"fonts/starjedi/Starjedi.ttf"
+        size_hint: None, 1
+        width: "170dp"
+    AnchorLayout:
+        TextInput:
+            id: textInput
+            size_hint: None, None
+            width: "100dp"
+            height: "35dp"
+            multiline: False 
+            anchor_y: "center"
+            on_text: root.URLS = self.text
+    Label:
+        text: "Descarga Album?"
+        font_name:"fonts/starjedi/Starjedi.ttf"
+        size_hint: None, 1
+        width: "170dp"
+    BoxLayout:
+        orientation:"vertical"
+        AnchorLayout
+            ToggleButton:
+                text: "si"
+                size_hint: None, None
+                width: "100dp"
+                height: "100dp"
+                anchor_x: "center"
+                font_name:"fonts/starjedi/Starjedi.ttf"
+        GridLayout:
+            cols: 2
+            Label:
+                text: "Artista"
+                font_name:"fonts/starjedi/Starjedi.ttf"
+
+            AnchorLayout:
+                TextInput:
+                    id: textInput
+                    size_hint: None, None
+                    width: "300dp"
+                    height: "35dp"
+                    multiline: False 
+                    anchor_y: "center"
+                    on_text: root.nombre_del_artista = self.text
+
+            Label:
+                text: "Album"
+                font_name:"fonts/starjedi/Starjedi.ttf"
+            AnchorLayout:
+                TextInput:
+                    id: textInput
+                    size_hint: None, None
+                    width: "300dp"
+                    height: "35dp"
+                    multiline: False 
+                    anchor_y: "center"
+                    on_text: root.nombre_del_album = self.text
+                    
+    Label:
+        text: ""
+    
+    Button:
+        text: "Descargar"
+        font_name:"fonts/starjedi/Starjedi.ttf"
+        size_hint: None, None
+        width: "100dp"
+        height: "100dp"
+        on_press: root.descargar_boton()
+
+
+   
+
+<WidgetsExample>:
+    cols: 3
+    ToggleButton:
+        text: root.widget_state
+        on_state: root.on_toggle(self)
+        size_hint: None, 1
+        width: "100dp"
+    Button: 
+        text: "Click!"
+        font_name: "fonts/starjedi/Starjedi.ttf"
+        on_press: root.presionado()
+        disabled: not root.state
+    Label:
+        text: root.my_text
+        font_name: "fonts/starjedi/Starjedi.ttf"
+        font_size: "80dp"
+    Switch:
+        id: switch_state
+        size_hint: None, 1
+        width: "100dp"
+        on_active: root.on_switch_active(self)
+    Slider:
+        id: my_slider
+        disabled: not switch_state.active
+        min: 0
+        max: 100
+        value: 50
+        #on_value: root.on_slider_value(self)
+        orientation: "vertical"
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: str(int(my_slider.value))
+        ProgressBar:
+            max: 100
+            min: 0
+            value: my_slider.value
+    TextInput:
+        id: textInput
+        size_hint: None, 1
+        width: "100dp"
+        multiline: False
+        on_text_validate: root.text_validate(self)
+    Label:
+        text: "Your name is " + root.text_input_str
+
+
+        
+
+
+
+
+
+
+
+
+<AnchorLayoutExample>
+    #right, left, center
+    anchor_x: "center"
+
+    #bottom, top, center
+    anchor_y: "top"
+    BoxLayout:
+        spacing:"10dp"
+        size_hint: .2, .2
+
+        Button:
+            text: "A"
+        Button:
+            text: "B"
+        
+<BoxLayoutExample>:
+    orientation: "horizontal"
+    Button:
+        text:   "A"
+        #size: "40dp", "40dp"
+        size_hint: .5, .5
+        #x, center_x, right
+        #y, center_y, top
+        pos_hint: {"center_y": .5}
+    BoxLayout:
+        orientation:"vertical"
+        spacing:"10dp"
+        Button:
+            text:"B"
+        Button:
+            text:"B2"
+        Button:
+            text:"B3"
+        Button:
+            text:"B4"
+    Label:
+        text: "C"
+
+<MainWidget>
+    Button:
+        text: "Hello"
+        pos: "200dp", "200dp"
+        size: "40dp", "40dp"
+    Label:
+        text: "Hello2"
+        pos: "300dp", "200dp"
+        size: "40dp", "40dp"
+        color: 1,0,0,1
+        
